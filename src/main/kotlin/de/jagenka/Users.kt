@@ -58,7 +58,7 @@ object Users : BiMap<Member, String>()
             val displayName = it.displayName
             val minecraftName = getValueForKey(it).orEmpty()
 
-            if (username.contains(name, ignoreCase = true) || displayName.contains(name, ignoreCase = true) || minecraftName.contains(name, ignoreCase = true))
+            if (name.isBlank() || username.contains(name, ignoreCase = true) || displayName.contains(name, ignoreCase = true) || minecraftName.contains(name, ignoreCase = true))
             {
                 list.add(User(username, displayName, minecraftName))
             }
@@ -75,10 +75,10 @@ object Users : BiMap<Member, String>()
 
     fun whoIsPrintable(name: String): String
     {
-        val members = Users.find(name)
+        val members = find(name)
         return if (members.isEmpty())
         {
-            "No users found!"
+            "No-one found!"
         } else
         {
             val sb = StringBuilder("")
